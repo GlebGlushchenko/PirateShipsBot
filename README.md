@@ -17,11 +17,15 @@
 ## Требования
 
 - Python 3.9+
-- Библиотеки: PyAutoGUI, OpenCV, Pillow, requests (для Telegram)
+- Библиотеки перечислены в **requirements.txt**
+
+**Установка одной командой:**
 
 ```bash
-pip install pyautogui opencv-python pillow requests
+pip install -r requirements.txt
 ```
+
+На Windows можно просто запустить **setup.bat** (двойной клик) — он сам поставит все библиотеки из `requirements.txt`.
 
 ---
 
@@ -92,8 +96,10 @@ battletest/
 ├── config.py              # Настройки бота и Telegram
 ├── game_bot_with_telegram.py   # Основной скрипт
 ├── telegram_notifier.py   # Отправка сообщений в Telegram
+├── requirements.txt       # Список библиотек (pip install -r requirements.txt)
 ├── telegram_stats.json    # Счётчики для уведомлений (создаётся автоматически)
 ├── images/                # Скриншоты кнопок (.png)
+├── setup.bat              # Установка зависимостей (двойной клик)
 ├── run_bot.bat            # Запуск с консолью
 ├── Start_Bot_NoConsole.vbs # Запуск без окна
 ├── Stop_Bot.bat           # Остановка бота, запущенного без консоли

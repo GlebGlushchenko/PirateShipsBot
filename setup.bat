@@ -1,9 +1,20 @@
 @echo off
-echo Trying to install using 'py' command...
-py -m pip install pyautogui opencv-python pillow
+cd /d "%~dp0"
+title Установка зависимостей — Battle Bot
+
 echo.
-echo If it failed, trying 'python' command...
-python -m pip install pyautogui opencv-python pillow
+echo  Устанавливаю библиотеки из requirements.txt...
+echo  (pyautogui, opencv-python, Pillow, requests)
 echo.
-echo Check the text above. If it says "Successfully installed", you are good!
+
+py -m pip install -r requirements.txt
+if errorlevel 1 (
+    echo.
+    echo  Пробую через python...
+    python -m pip install -r requirements.txt
+)
+
+echo.
+echo  Готово. Запускай run_bot.bat или Start_Bot_NoConsole.vbs
+echo.
 pause
