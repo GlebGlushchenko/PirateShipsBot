@@ -219,15 +219,18 @@ class TelegramNotifier:
             pass
         return {}
     
-    def notify_hang(self, idle_seconds):
-        """Уведомление о возможном зависании (долго не было действий)."""
+    def notify_hang(self, idle_seconds, screenshot_path=None):
+        """Уведомление о возможном зависании. Если передан screenshot_path — отправляет скриншот с подписью."""
         message = (
-            f"⚠️ <b>ВОЗМОЖНОЕ ЗАВИСАНИЕ</b>\n\n"
+            f"⚠️ ВОЗМОЖНОЕ ЗАВИСАНИЕ\n\n"
             f"Более {idle_seconds} сек не было ни одного действия.\n"
             f"Проверьте, не завис ли бот или игра.\n\n"
             f"🕐 {datetime.now().strftime('%H:%M:%S')}"
         )
-        self.send_message(message, important=True)
+        if screenshot_path and os.path.exists(screenshot_path):
+            self.send_photo(screenshot_path, caption=message)
+        else:
+            self.send_message(message, important=True)
 
     def stop(self, send_stopped_message=False):
         """Остановка уведомлений. send_stopped_message=False — не слать «Бот остановлен» (если уже отправили итог)."""

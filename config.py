@@ -16,7 +16,7 @@ BOT = {
 
 TELEGRAM_CONFIG = {
     "enabled": True,
-    "token": "8784961160:AAFMTS3_2LVmfKGDdx8X2TNo2PHaWQnZdzU",
+    "token": "8784961160:AAHThJOpkJBKSW-vXJBHKSkQ7M4yOq0KpGY",
     "chat_id": "621119412",
     "notify_on_error": True,
     "daily_report": True,

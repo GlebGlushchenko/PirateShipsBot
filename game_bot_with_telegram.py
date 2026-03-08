@@ -6,6 +6,7 @@ import pyautogui
 import time
 import random
 import os
+import tempfile
 from datetime import datetime
 
 from config import BOT, TELEGRAM_CONFIG, IMAGES_DIR
@@ -214,7 +215,7 @@ def check_daily_report():
 
 
 def check_hang_and_notify():
-    """Если долго не было действий — отправить уведомление о возможном зависании (раз за период)."""
+    """Если долго не было действий — скриншот экрана и уведомление в Telegram (раз за период)."""
     global last_hang_notify_time
     now = time.time()
     if last_activity_time == 0:
@@ -226,7 +227,21 @@ def check_hang_and_notify():
         return
     last_hang_notify_time = now
     if telegram:
-        telegram.notify_hang(int(idle))
+        screenshot_path = None
+        try:
+            fd, screenshot_path = tempfile.mkstemp(suffix=".png", prefix="hang_")
+            os.close(fd)
+            pyautogui.screenshot(screenshot_path)
+            telegram.notify_hang(int(idle), screenshot_path=screenshot_path)
+        except Exception as e:
+            print(f"Скриншот при зависании не удался: {e}")
+            telegram.notify_hang(int(idle))
+        finally:
+            if screenshot_path and os.path.exists(screenshot_path):
+                try:
+                    os.unlink(screenshot_path)
+                except OSError:
+                    pass
 
 
 # ===== ГЛАВНЫЙ ЦИКЛ =====
