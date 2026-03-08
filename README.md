@@ -33,8 +33,16 @@ pip install -r requirements.txt
 
 ### 1. Конфиг — `config.py`
 
-- **BOT** — точность `confidence`, задержки, интервал статистики (по умолчанию раз в час), проверка зависания (сек), уведомление каждые N побед.
-- **TELEGRAM_CONFIG** — `token` и `chat_id` (получить у [@BotFather](https://t.me/BotFather) и [@userinfobot](https://t.me/userinfobot)), включение уведомлений и ежедневного отчёта.
+Файл **config.py** с токеном и chat_id в репозиторий не попадает (он в `.gitignore`). При первом запуске:
+
+1. Скопируй шаблон в конфиг:
+   - **Windows:** `copy config.example.py config.py`
+   - **Linux/macOS:** `cp config.example.py config.py`
+2. Открой **config.py** и подставь свои данные:
+   - **token** — от [@BotFather](https://t.me/BotFather)
+   - **chat_id** — от [@userinfobot](https://t.me/userinfobot)
+
+В **BOT** настраиваются: точность `confidence`, задержки, интервал статистики (раз в час), проверка зависания (сек), уведомление каждые N побед. В **TELEGRAM_CONFIG** — включение уведомлений и ежедневного отчёта.
 
 ### 2. Картинки — папка `images/`
 
@@ -93,7 +101,8 @@ py -3.9 game_bot_with_telegram.py
 
 ```
 battletest/
-├── config.py              # Настройки бота и Telegram
+├── config.example.py      # Шаблон настроек (скопировать в config.py)
+├── config.py              # Твои настройки и секреты (не коммитится!)
 ├── game_bot_with_telegram.py   # Основной скрипт
 ├── telegram_notifier.py   # Отправка сообщений в Telegram
 ├── requirements.txt       # Список библиотек (pip install -r requirements.txt)
